@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+    input{
+        border-radius: 20px;
+        border: 1px solid rgb(4, 252, 235);
+        padding: 4px 10px;
+    }
+
+    textarea{
+        border-radius: 20px;
+    }
+    .border-1{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+</style>
+<br>
+<a class="a-search-back" href="{% url 'main_page' %}"><i class='bx bx-left-arrow-alt'></i> Назад</a>
+<div class="border-1">
+    <br>
+    <h3>Загрузка товара</h3>
+    <br>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="mb-3">
+            {{ form.images.label_tag }}
+            {{ form.images }}
+        </div>
+        <div class="mb-3">
+            {{ form.name.label_tag }}
+            {{ form.name }}
+        </div>
+        <div class="mb-3">
+            {{ form.price.label_tag }}
+            {{ form.price }}
+        </div>
+        <div class="mb-3">
+            {{ form.description.label_tag }}
+            {{ form.description }}
+        </div>
+        <div class="mb-3">
+            {{ form.manufacturer.label_tag }}
+            {{ form.manufacturer }}
+        </div>
+        <div class="mb-3">
+            {{ form.warranty.label_tag }}
+            {{ form.warranty }}
+        </div>
+        <br>
+        <select name="category">
+            {% for category in categories %}
+                <option value="{{ category.id }}">{{ category.name }}</option>
+            {% endfor %}
+        </select>
+        <!-- <div>
+            {{ images_form.image.label_tag }}
+            {{ images_form.image }}
+        </div> -->
+        <button type="submit" class="btn btn-success">Загрузить</button>
+    </form>
+</div>
+<br>
+<br>
+{% endblock %}

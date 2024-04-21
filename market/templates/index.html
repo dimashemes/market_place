@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+</style>
+<div style="text-align: center; padding: 20%;">
+    <h1>Страница входа</h1>
+    <p>Добро пожаловать на сайт!</p>
+    <p>Чтобы авторизоваться, нажмите <a href="/login">сюда</a></p>
+    <p style="display: flex; align-items: center; justify-content: center;"><a href="{% url 'main_page' %}">Посмотеть товары <i class='bx bx-right-arrow-alt' ></i></a></p>
+</div>
+{% endblock %}

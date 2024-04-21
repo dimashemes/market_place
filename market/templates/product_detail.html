@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+{% block content %}
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+        crossorigin="anonymous"></script>
+<style>
+    #row-p-d {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .border-1a {
+        border: 1px solid rgba(128, 128, 128, 0.314);
+        margin-top: 40px;
+        border-radius: 20px;
+    }
+
+    .carousel-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+</style>
+<p style="padding-bottom: 20px;"></p>
+<a class="a-search-back" href="{% url 'main_page' %}"><i class='bx bx-left-arrow-alt'></i> На главную</a>
+<div class="border-1a">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-2" id="row-p-d" style="padding: 90px 60px;">
+        <div class="col">
+            <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    {% for image in product.productimages.all %}
+                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                        <!-- <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal" > -->
+                        <img src="{{ image.image.url }}" alt="{{ product.name }}" data-bs-toggle="modal"
+                             data-bs-target="#imageModal">
+                        <!-- </a> -->
+                    </div>
+                    {% endfor %}
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel"
+                        data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#productCarousel"
+                        data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+        <div class="col">
+            <h1>{{ product.name }}</h1>
+            <p>Цена: <strong>{{ product.price }}</strong> KZT</p>
+            <p>Гарантия: {{ product.warranty }}</p>
+            <p>Производитель: <span style="font-weight: 700;">{{ product.manufacturer }}</span></p>
+            <strong>Описание: </strong></span>
+            <p><span>{{ product.description }}</span></p>
+            {% if user.is_authenticated %}
+            <a class="btn btn-outline-dark" href="https://wa.me/77071715559" style="color: aqua;"
+               target="_blank">Купить</a>
+            <a class="btn btn-dark" href="{% url 'add_to_cart' product.id %}">
+                <i class='bx bx-cart'></i>
+            </a>
+            {% else %}
+            <p style="color: red">Авторизуйтесь чтобы купить данный товар!</p>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Важное сообщение!</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <h4 style="font-weight: 400;">Чтобы купить, нужно <a href="{% url 'login' %}">войти!</a>
+                            </h4>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+<div id="imageModal" class="modal fade" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="imageModalLabel">{{ product.name }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <img id="modalImage" class="img-fluid" alt="{{ product.name }}">
+            </div>
+
+        </div>
+    </div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var myCarousel = new bootstrap.Carousel(document.getElementById('productCarousel'), {
+            interval: false
+        });
+
+
+        $('#imageModal').on('show.bs.modal', function (event) {
+            var imageSrc = $(event.relatedTarget).attr('src');
+            console.log(imageSrc)
+            $('#modalImage').attr('src', imageSrc);
+        });
+    });
+</script>
+{% endblock %}

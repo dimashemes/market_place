@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+<br>
+<a class="a-search-back" href="{% url 'main_page' %}"><i class='bx bx-left-arrow-alt' ></i> На главную</a>
+<br>
+  <h1>Избранное</h1>
+  <br>
+  <ul>
+    <div class="row">
+      {% for item in favorite_items %}
+    <div class="col-12 col-sm-6 col-md-4 col-xl-3 mb-4">
+      <div class="card">
+          <br>
+              <img src="{{ item.product.image.url }}" class="card-img-top" alt="{{ item.product.name }}" style="width: 200px; height: 200px; object-fit: cover;">
+          <div class="card-body">
+              <h5 class="card-title">{{ item.product.name }}</h5>
+              <br>
+              <p>Цена: <strong>{{ item.product.price }}</strong> KZT</p>
+              <a href="{% url 'remove_from_favorite' item.id %}" class="btn btn-outline-dark" style="color: rgba(0, 255, 255, 0.77);">Удалить</a>
+              <a href="{% url 'product_detail' item.product.id %}" class="btn btn-outline-dark" style="color: rgba(0, 255, 255, 0.77);">Подробнее</a>
+          </div>
+      </div>
+  </div>
+    {% endfor %}
+    </div>
+  </ul>
+{% endblock %}

@@ -1,0 +1,15 @@
+<div class="card">
+  <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+  <div class="card-body">
+    <h5 class="card-title">{{ product.name }}</h5>
+    <p>Цена: <strong>{{ product.price }}</strong> KZT</p>
+    <form method="post" action="{% url 'add_to_cart' product.id %}">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-primary">Добавить в корзину</button>
+    </form>
+    <form method="post" action="{% url 'add_to_favorite' product.id %}">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-success">Добавить в избранное</button>
+    </form>
+  </div>
+</div>

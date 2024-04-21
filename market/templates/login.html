@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+<br>
+<br>
+<br>
+<br>
+<h1>Авторизация</h1>
+<form action="" method="post">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="email" class="form-label">Email address</label>
+        <input name="email" type="email" class="form-control" id="email" required>
+    </div>
+    <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input name="password" type="password" class="form-control" id="password">
+    </div>
+    {% if message %}
+    <div class="alert alert-danger" role="alert">
+        {{ message }}
+    </div>
+    {% endif %}
+    <input type="submit" class="btn btn-dark" value="Войти">
+</form>
+<h6 style="font-weight: 400; font-size: 20px;">У вас нет аккаунт? Создайте <a href="{% url 'register' %}">здесь</a>!</h6>
+<br>
+<br>
+{% endblock %}
