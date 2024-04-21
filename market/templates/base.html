@@ -38,6 +38,11 @@
                                style="color: black;">Главная</a>
                         </li>
                         {% if user.is_authenticated %}
+                        {% if user.is_staff %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'admin:index' %}" style="color: black;">Dashboard</a>
+                        </li>
+                        {% endif %}
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'cart_view' %}" style="color: black;">Корзина</a>
                         </li>
@@ -79,6 +84,7 @@
         </nav>
     </div>
 </div>
+
 
 <div class="container">
     {% block content %}

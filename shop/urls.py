@@ -7,7 +7,6 @@ from market import views_auth
 
 app_name = 'market'
 
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='index'),
@@ -16,7 +15,6 @@ urlpatterns = [
     path('login/', views_auth.login_view, name='login'),
     path('logout/', views_auth.logout_view, name='logout'),
     path('account/', views.account, name='account'),
-    path('add/', views.ProductCreateView.as_view(), name='product_add'),
     path('upload/', views.upload_product, name='upload_product'),
     path('product/<int:product_id>/', views.product_detail, name='product_detail'),
     path('search/', views.search_product, name='search_product'),
@@ -28,6 +26,10 @@ urlpatterns = [
     path('favorites/', views.favorite_view, name='favorite_view'),
     path('add_to_cart/<int:product_id>/', views.add_to_cart, name='add_to_cart'),
     path('add_to_favorite/<int:product_id>/', views.add_to_favorite, name='add_to_favorite'),
+
+    path('categories/', views.category_list, name='category_list'),
+    path('edit/<int:category_id>/', views.edit_category, name='edit_category'),
+    path('delete/<int:category_id>/', views.delete_category, name='delete_category'),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

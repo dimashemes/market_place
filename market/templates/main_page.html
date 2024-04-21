@@ -40,6 +40,8 @@
         <div class="col-12 mb-4">
             <a href="{% url 'upload_product' %}" class="btn btn-outline-dark" style="color: rgb(0, 200, 255);">Добавить
                 товар</a>
+            <a href="{% url 'category_list' %}" class="btn btn-outline-dark" style="color: rgb(0, 200, 255);">Добавить
+                категории</a>
         </div>
         {% endif %}
         <form action="{% url 'search_product' %}" method="get" class="form-inline my-2 my-lg-0"

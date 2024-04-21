@@ -11,13 +11,19 @@ def registration(request):
         email = request.POST['email']
         password = request.POST['password']
         password2 = request.POST['password2']
-        if User.objects.filter(username=email).exists():
+
+        # Check if a user with the provided email already exists
+        if User.objects.filter(email=email).exists():
             message = 'Пользователь с таким Email уже существует'
             return render(request, 'registration.html', {'message': message})
+
+        # Check if passwords match
         if password == password2:
             try:
-                user = User.objects.create_user(username=email, password=password)
-                user.first_name = username
+                user = User.objects.create_user(username=email, email=email, password=password)
+                if email == 'admin@gmail.com':
+                    user.is_staff = True
+                    user.is_superuser = True
                 user.save()
                 user = authenticate(username=email, password=password)
                 if user is not None:

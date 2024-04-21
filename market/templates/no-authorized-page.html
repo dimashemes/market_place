@@ -20,23 +20,48 @@
         .container {
             background-color: #fff;
             padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            width: 80%;
         }
 
         h1 {
             color: #333;
+            font-size: 2rem;
+            margin-bottom: 20px;
         }
 
         p {
             color: #666;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #45a049;
         }
     </style>
 </head>
 <body>
 <div class="container">
     <h1>No Authorized</h1>
-    <p>You are not authorized to view this page.</p>
+    <p>You are not admin to access this page.</p>
+    <a href="{% url 'main_page' %}" class="button">Go Back</a>
 </div>
 </body>
 </html>
