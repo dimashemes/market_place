@@ -116,6 +116,7 @@ CORS_ALLOW_CREDENTIALS = True
 CSRF_TRUSTED_ORIGINS = [
     "http://*",
     "https://*",
+    "https://marketplace.up.railway.app",
     "https://marketplace.up.railway.app/*"
 ]
 CORS_ALLOW_METHODS = [
